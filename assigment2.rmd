@@ -6,4 +6,48 @@ output:
    pdf_document
 ---
 
+```{R import and prep,include = FALSE,echo = FALSE}
+library(quanteda)
+library(quanteda.corpora)
+library(glue)
+
+data(data_corpus_ukmanifestos)
+man <- data_corpus_ukmanifestos
+
+docnames(man) <- glue('{man$documents$Year}_{man$documents$Party}')
+```
+
+
+In this assignment, i reproduce the results from 
+@laver_extracting_2003, and elaborate on the findings
+with a couple of examples. Additionally, i fit a 
+Wordfish model on the same data, and compare the two 
+modelling approaches.
+
+# Wordscores and wordfish
+
+Both Wordscores [@laver_extracting_2003] and Wordfish
+[@slapin_scaling_2008] are approaches to the problem
+of estimating unobserved characteristics about text,
+using pre-classified training cases.
+
+In this case, the approaches are illustrated using
+political texts, and with estimating ideological 
+positions 
+
+# Estimating wordscores
+
+```{R fitting,include = FALSE,echo = FALSE}
+man_dfm <- dfm(man)
+man_dfm_t <- man_dfm[1:50,]
+man_dfm_ts <- man_dfm[51:nrow(man_dfm),]
+
+ws_fit <- textmodel_wordscores(man_dfm_t,
+                               y = rep(0,nrow(man_dfm)))
+ws_pred <- predict(ws_fit,
+                   newdata = man_dfm_ts,
+                   rescaling = 'lbg')
+```
+
+
 
