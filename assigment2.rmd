@@ -1,0 +1,9 @@
+---
+title: "Assignment 2"
+author: Peder Gotch Landsverk
+bibliography: lib.bib
+output:
+   pdf_document
+---
+
+
